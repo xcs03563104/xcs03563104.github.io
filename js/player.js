@@ -4,7 +4,7 @@
   const RULES = {
     '1.html': ['music1.mp3', 'music2.mp3', 'music3.mp3'],
   };
-  const DEFAULT_LIST = ['yy/Girl In The Dark For The Light - HyuN.wav','yy/Love Sacrifice - sky_delta,RANASOL.wav'];
+  const DEFAULT_LIST = ['yy/Girl In The Dark For The Light - HyuN.mp3','yy/Love Sacrifice - sky_delta,RANASOL.mp3'];
 
   function getFileName() {
     const name = location.pathname.split('/').pop();
