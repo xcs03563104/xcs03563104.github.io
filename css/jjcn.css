@@ -1,0 +1,109 @@
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --black: #1a1a1a;
+    --gray-line: #d5d5d5;
+    --radius: 14px;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #fff;
+    color: var(--black);
+    min-height: 100vh;
+  }
+
+  .topbar {
+    position: sticky; top: 0; height: 60px; background: #fff;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 20px; z-index: 100;
+  }
+  .menu-btn {
+    width: 42px; height: 42px; border: none; background: transparent;
+    cursor: pointer; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; gap: 5px;
+    border-radius: 10px; transition: transform 0.25s ease, background 0.2s ease;
+    position: relative; z-index: 200;
+  }
+  .menu-btn:hover { background: #f2f2f2; }
+  .menu-btn:active { transform: scale(0.88); }
+  .menu-btn span { display: block; width: 22px; height: 2px; background: var(--black); border-radius: 2px; }
+
+  .lang-switch {
+    display: inline-flex; align-items: center; gap: 3px;
+    padding: 7px 12px; border-radius: 10px; font-size: 15px;
+    color: var(--black); text-decoration: none; cursor: pointer;
+    user-select: none; transition: background 0.2s ease;
+  }
+  .lang-switch:hover { background: #f2f2f2; }
+  .lang-switch.reverse { flex-direction: row-reverse; }
+  .lang-switch .cn { font-weight: 700; }
+  .lang-switch .en { font-weight: 400; }
+  .lang-switch .sep { opacity: 0.5; margin: 0 1px; }
+  .lang-switch.pop .cn, .lang-switch.pop .en { animation: popScale 0.35s ease; }
+  @keyframes popScale {
+    0% { transform: scale(1); }
+    45% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+
+  .side-menu {
+    position: fixed; top: 0; left: 0; width: 270px; max-width: 78vw;
+    height: 100vh; background: #efefef; padding: 84px 0 30px;
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 150; box-shadow: 6px 0 30px rgba(0, 0, 0, 0.07);
+    overflow-y: auto;
+  }
+  .side-menu.open { transform: translateX(0); }
+  .side-menu a {
+    display: block; padding: 18px 28px; color: var(--black);
+    text-decoration: none; font-size: 15px;
+    border-bottom: 1px solid var(--gray-line);
+    transition: background 0.2s ease, padding-left 0.2s ease;
+  }
+  .side-menu a:last-child { border-bottom: none; }
+  .side-menu a:hover { background: #e0e0e0; padding-left: 36px; }
+
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.22);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.35s ease; z-index: 120;
+  }
+  .overlay.show { opacity: 1; pointer-events: auto; }
+
+  .page {
+    max-width: 640px; margin: 0 auto; padding: 60px 24px 80px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+
+  .empty-text {
+    font-size: 15px; line-height: 2; color: var(--black);
+    text-align: center; margin-bottom: 60px;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 14px 40px; border: 1.6px solid var(--black);
+    border-radius: var(--radius); color: var(--black); background: #fff;
+    text-decoration: none; font-size: 14px; font-weight: 500;
+    transition: all 0.25s ease;
+  }
+  .btn:hover {
+    background: var(--black); color: #fff;
+    transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  .btn:active { transform: translateY(0) scale(0.97); }
+
+  .fade-item { opacity: 0; animation: fadeIn 1s ease forwards; }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.10s; }
+
+  @media (max-width: 768px) {
+    .page { padding: 40px 22px 70px; }
+  }
+</style>
