@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>我的作品|xcs的博客</title>
 <link rel="stylesheet" href="css/duzihenbao.css">
+<link rel="stylesheet" href="css/hsb.css">
 <style>
   html { scroll-behavior: smooth; }
 </style>
@@ -42,12 +43,12 @@
     <p style="font-size: 20px;">快速跳转</p>
     <p><br></p>
 
-<div style="display:flex;">
-<a href="#OC" class="btn">OC</a>
-<a href="#同人" class="btn">同人</a>
-<a href="#线稿/黑白图" class="btn">线稿/<br>黑白图</a>
-<a href="#草图" class="btn">草图</a>
-<a href="#草稿" class="btn">草稿</a>
+<div class="h-scroll" style="display:flex;">
+ <div class="h-item"><a href="#OC" class="btn">OC</a></div>
+ <div class="h-item"><a href="#同人" class="btn">同人</a></div>
+ <div class="h-item"><a href="#线稿/黑白图" class="btn">线稿/<br>黑白图</a></div>
+ <div class="h-item"><a href="#草图" class="btn">草图</a></div>
+ <div class="h-item"><a href="#草稿" class="btn">草稿</a></div>
 </div>
 
      <a style="font-size: 25px;" href="#"  class="content fade-item d3">最近艺术</a>
@@ -127,6 +128,8 @@
     </div>
   </main>
 
+ 
+<script src="js/player.js"></script>
   <script>window.MENU_LANG = 'zh';</script>
   <script src="js/main.js"></script>
   <script src="js/ladabian.js"></script>
