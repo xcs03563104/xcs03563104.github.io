@@ -4,33 +4,44 @@
   const RULES = {
     '1.html': ['music1.mp3', 'music2.mp3', 'music3.mp3'],
   };
-  const DEFAULT_LIST = ['yy/Girl In The Dark For The Light - HyuN.mp3','yy/Love Sacrifice - sky_delta,RANASOL.mp3'];
+  const DEFAULT_LIST = ['yy/Girl-In-The-Dark-For-The-Light-HyuN.mp3','yy/Love-Sacrifice-sky_delta_RANASOL.mp3'];
 
-  function getFileName() {
-    const name = location.pathname.split('/').pop();
-    return name || 'index.html';
+  const KEY = 'music_player_state';
+  const SPEED = 60;
+  const SAVE_INTERVAL = 3000; 
+
+  function getPageId() {
+    return (location.pathname || '/').replace(/\/+$/, '') || '/';
   }
 
-  const listKey = getFileName();
-  const playlist = RULES[listKey] || DEFAULT_LIST;
-
-  const listId = RULES[listKey] ? listKey : '__default__';
+  const pageId = getPageId();
+  const fileName = pageId.split('/').pop() || 'index.html';
+  const playlist = RULES[fileName] || DEFAULT_LIST;
+  const listId = RULES[fileName] ? fileName : '__default__';
 
   const btn = document.createElement('div');
   btn.id = 'musicBtn';
+  btn.setAttribute('role', 'button');
+  btn.setAttribute('aria-label', '音乐播放器');
 
   const ball = document.createElement('div');
   ball.className = 'ball';
   ball.textContent = '♪';
-
   btn.appendChild(ball);
   document.body.appendChild(btn);
 
   const audio = document.createElement('audio');
   audio.id = 'audio';
+  audio.preload = 'metadata';
+  audio.id = 'musicPlayerAudio_' + Math.random().toString(36).slice(2, 8);
   document.body.appendChild(audio);
 
-  const KEY = 'music_player_state';
+  let index = 0;
+  let angle = 0;
+  let spinning = false;
+  let lastT = 0;
+  let rafId = 0;
+  let currentSrcToken = 0;
 
   let saved = {
     listId: '',
@@ -39,170 +50,216 @@
     playing: false,
     angle: 0
   };
-
   try {
     const s = JSON.parse(localStorage.getItem(KEY));
-    if (s) saved = Object.assign(saved, s);
-  } catch (e) {}
+    if (s && typeof s === 'object') {
+      if (typeof s.listId === 'string') saved.listId = s.listId;
+      if (Number.isFinite(s.index)) saved.index = s.index;
+      if (Number.isFinite(s.time)) saved.time = s.time;
+      if (typeof s.playing === 'boolean') saved.playing = s.playing;
+      if (Number.isFinite(s.angle)) saved.angle = s.angle;
+    }
+  } catch (e) {  }
 
-  // 只有歌单标识一致才恢复
-  let index = 0;
   if (saved.listId === listId && playlist[saved.index] !== undefined) {
     index = saved.index;
   }
+  angle = saved.angle % 360;
 
   audio.src = playlist[index];
-  audio.preload = 'metadata';
-
-  let angle = saved.angle || 0;
-
-  let spinning = false;
-  let lastT = 0;
-  const SPEED = 60;
 
   function loop(t) {
+    if (!spinning) { rafId = 0; return; }
     if (!lastT) lastT = t;
-    const dt = (t - lastT) / 1000;
+    const dt = Math.min((t - lastT) / 1000, 0.1);
     lastT = t;
-    if (spinning) {
-      angle = (angle + SPEED * dt) % 360;
-      btn.style.transform = 'rotate(' + angle + 'deg)';
-    }
-    requestAnimationFrame(loop);
+    angle = (angle + SPEED * dt) % 360;
+    btn.style.transform = 'rotate(' + angle + 'deg)';
+    rafId = requestAnimationFrame(loop);
   }
   btn.style.transform = 'rotate(' + angle + 'deg)';
-  requestAnimationFrame(loop);
 
-  function startSpin() { spinning = true; lastT = 0; }
-  function stopSpin()  { spinning = false; }
-
-  function play() {
-    audio.play()
-      .then(function () { startSpin(); save(); })
-      .catch(function (err) { console.log('播放被拦截：', err); });
+  function startSpin() {
+    if (spinning) return;
+    spinning = true;
+    lastT = 0;
+    if (!rafId) rafId = requestAnimationFrame(loop);
+  }
+  function stopSpin() {
+    spinning = false;
   }
 
-  function pause() {
-    audio.pause();
-    stopSpin();
-    save();
-  }
-
-  function save() {
+  let lastSave = 0;
+  function save(force) {
+    const now = Date.now();
+    if (!force && now - lastSave < SAVE_INTERVAL) return;
+    lastSave = now;
     try {
       localStorage.setItem(KEY, JSON.stringify({
-        listId: listId, 
+        listId: listId,
         index: index,
         time: audio.currentTime || 0,
-        playing: !audio.paused,
+        playing: !audio.paused && !audio.ended,
         angle: angle
       }));
     } catch (e) {}
   }
 
-  setInterval(save, 1000);
-  window.addEventListener('beforeunload', save);
-  window.addEventListener('pagehide', save);
+  function play() {
+    audio.play().then(function () {
+      startSpin();
+      save(true);
+    }).catch(function (err) {
+      console.log('播放被拦截：', err);
+    });
+  }
+
+  function pause() {
+    audio.pause();
+    stopSpin();
+    save(true);
+  }
+
+  function loadTrack(i, autoplay) {
+    index = (i + playlist.length) % playlist.length;
+    const token = ++currentSrcToken;
+    audio.src = playlist[index];
+    audio.load();
+
+    const onMeta = function () {
+      if (token !== currentSrcToken) return; 
+      audio.removeEventListener('loadedmetadata', onMeta);
+      if (autoplay) {
+        play();
+      } else {
+        save(true);
+      }
+    };
+
+    if (audio.readyState >= 1) {
+      onMeta();
+    } else {
+      audio.addEventListener('loadedmetadata', onMeta, { once: true });
+    }
+  }
 
   function next() {
-    if (playlist.length <= 1) return;
-    index = (index + 1) % playlist.length;
-    audio.src = playlist[index];
-    audio.currentTime = 0;
-    play();
+    if (playlist.length <= 1) { audio.currentTime = 0; play(); return; }
+    loadTrack(index + 1, true);
   }
-
   function prev() {
-    if (playlist.length <= 1) return;
-    index = (index - 1 + playlist.length) % playlist.length;
-    audio.src = playlist[index];
-    audio.currentTime = 0;
-    play();
+    if (playlist.length <= 1) { audio.currentTime = 0; play(); return; }
+    loadTrack(index - 1, true);
   }
 
-  let count = 0;
-  let timer = null;
+  audio.addEventListener('play', function () {
+    document.querySelectorAll('audio, video').forEach(function (m) {
+      if (m !== audio && !m.paused) {
+        try { m.pause(); } catch (e) {}
+      }
+    });
+    startSpin();
+  });
+
+  audio.addEventListener('playing', function () {
+    startSpin();
+    save(true);
+  });
+
+  audio.addEventListener('pause', function () {
+    if (audio.paused && !audio.seeking) stopSpin();
+    save(true);
+  });
+
+  audio.addEventListener('ended', function () {
+    next();
+  });
+
+  audio.addEventListener('error', function () {
+    console.log('音频加载失败：', audio.src);
+    if (playlist.length > 1) next();
+  });
+
+  audio.addEventListener('timeupdate', function () {
+    save(false);
+  });
+
+  let clickCount = 0;
+  let clickTimer = null;
 
   btn.addEventListener('click', function () {
     ball.classList.add('clicked');
     setTimeout(function () { ball.classList.remove('clicked'); }, 160);
 
-    count++;
-    if (timer) clearTimeout(timer);
+    clickCount++;
+    if (clickTimer) clearTimeout(clickTimer);
 
-    timer = setTimeout(function () {
-      if (count === 1) {
+    clickTimer = setTimeout(function () {
+      const n = clickCount;
+      clickCount = 0;
+      clickTimer = null;
+
+      if (n === 1) {
         audio.paused ? play() : pause();
-      } else if (count === 2) {
+      } else if (n === 2) {
         next();
       } else {
         prev();
       }
-      count = 0;
-      timer = null;
-    }, 500);
+    }, 400);
   });
 
-  function watchOthers() {
-    const others = document.querySelectorAll('audio, video');
-    others.forEach(function (m) {
-      if (m === audio) return;
-      if (m.dataset.watched) return;
-      m.dataset.watched = '1';
-
-      m.addEventListener('play', function () {
-        if (!audio.paused) {
-          audio.pause();
-          stopSpin();
-          save();
-        }
-      });
+  function watchOne(m) {
+    if (m === audio || m.dataset.musicWatched) return;
+    m.dataset.musicWatched = '1';
+    m.addEventListener('play', function () {
+      if (!audio.paused) pause();
     });
   }
 
-  watchOthers();
+  function watchOthers(root) {
+    if (root.nodeType === 1 && (root.tagName === 'AUDIO' || root.tagName === 'VIDEO')) {
+      watchOne(root);
+    }
+    if (root.querySelectorAll) {
+      root.querySelectorAll('audio, video').forEach(watchOne);
+    }
+  }
 
-  const mo = new MutationObserver(watchOthers);
+  watchOthers(document.body);
+
+  const mo = new MutationObserver(function (mutations) {
+    for (let i = 0; i < mutations.length; i++) {
+      const added = mutations[i].addedNodes;
+      for (let j = 0; j < added.length; j++) {
+        watchOthers(added[j]);
+      }
+    }
+  });
   mo.observe(document.body, { childList: true, subtree: true });
 
-  audio.addEventListener('play', function () {
-  document.querySelectorAll('audio, video').forEach(function (m) {
-    if (m !== audio && !m.paused) m.pause();
-  });
-});
-
-audio.addEventListener('ended', function () {
-  if (playlist.length <= 1) {
-    audio.currentTime = 0;
-    play();
-    return;
-  }
-  index = (index + 1) % playlist.length;
-  audio.src = playlist[index];
-  audio.currentTime = 0;
-  play();
-});
-
   function restore() {
-    if (saved.listId !== listId) return; 
-    if (!saved.playing) return; 
+    if (saved.listId !== listId || !saved.playing) return;
 
     const targetTime = saved.time || 0;
+    const token = ++currentSrcToken;
 
     function seekAndPlay() {
+      if (token !== currentSrcToken) return;
       try { audio.currentTime = targetTime; } catch (e) {}
       audio.play().then(function () {
         startSpin();
-        save();
+        save(true);
       }).catch(function () {
         const once = function () {
-          try { audio.currentTime = targetTime; } catch (e) {}
-          play();
           document.removeEventListener('click', once);
           document.removeEventListener('touchstart', once);
+          if (token !== currentSrcToken) return;
+          try { audio.currentTime = targetTime; } catch (e) {}
+          play();
         };
-        document.addEventListener('click', once);
-        document.addEventListener('touchstart', once);
+        document.addEventListener('click', once, { once: true });
+        document.addEventListener('touchstart', once, { once: true, passive: true });
       });
     }
 
@@ -212,11 +269,12 @@ audio.addEventListener('ended', function () {
       audio.addEventListener('loadedmetadata', seekAndPlay, { once: true });
     }
   }
+  restore();
 
-  restore(); 
-
-  window.addEventListener('visibilitychange', function () {
-    if (document.hidden) save();
+  window.addEventListener('pagehide', function () { save(true); });
+  window.addEventListener('beforeunload', function () { save(true); });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) save(true);
   });
 
 })();

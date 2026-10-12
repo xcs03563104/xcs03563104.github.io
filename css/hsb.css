@@ -7,7 +7,9 @@
   z-index: 99999;
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transform-origin: 12.5px 12.5px;
   will-change: transform;
 }
@@ -33,4 +35,33 @@
 
 .ball.clicked{
   transform: scale(.72);
+}
+
+@media (max-width: 768px) {
+  #musicBtn{
+    width: 44px;
+    height: 44px;
+    left: max(12px, env(safe-area-inset-left));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    transform-origin: 22px 22px;
+  }
+  .ball{
+    left: 50%;
+    top: 50%;
+    margin-left: -12.5px;
+    margin-top: -12.5px;
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (hover: none) {
+  #musicBtn:active .ball{
+    transform: scale(.72);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #musicBtn{ will-change: auto; }
+  .ball{ transition: none; }
 }
