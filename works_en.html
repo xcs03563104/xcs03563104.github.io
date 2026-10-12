@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Works|xcs's Blog</title>
-<link rel="stylesheet" href="css/jjcn.css">
+<title>My Works | xcs's Blog</title>
+<link rel="stylesheet" href="css/duzihenbao.css">
+<style>
+  html { scroll-behavior: smooth; }
+</style>
 </head>
 <body>
 
   <div class="topbar">
-    <button class="menu-btn" id="menuBtn" aria-label="菜单">
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
     <a href="works.html" class="lang-switch" id="langSwitch">
-      <span class="cn">中</span>
+      <span class="cn">eng</span>
       <span class="sep">|</span>
-      <span class="en">eng</span>
+      <span class="en">中</span>
     </a>
   </div>
 
@@ -24,13 +27,115 @@
   <div class="overlay" id="overlay"></div>
 
   <main class="page">
-    <p class="empty-text fade-item d1">Nothing here yet!</p>
+
+    <img src="images/avatar.jpg" alt="Avatar" class="avatar  fade-item d1">
+    <p class="csb fade-item d3">@xcs03563104</p>
+     <p class="intro fade-item d1">
+      16↓, draw occasionally, love drawing chibi characters, fanart and OCs are my passion<br>
+        Learning Blender, MMD and Live2D<br>
+        Shuichi Saihara is my absolute favorite!
+    </p>
+
+    <div class="divider fade-item d2"></div>
+
+    <p><br></p>
+    <p style="font-size: 20px;">Quick Jump</p>
+    <p><br></p>
+
+<div style="display:flex;">
+<a href="#OC" class="btn">OC</a>
+<a href="#Fanart" class="btn">Fanart</a>
+<a href="#Lineart/B&W" class="btn">Lineart/<br>B&W</a>
+<a href="#Sketches" class="btn">Sketches</a>
+<a href="#Drafts" class="btn">Drafts</a>
+</div>
+
+     <p style="font-size: 25px;"class="content fade-item d3">Recent Art</p>
+
+      <div class="art-wrap fade-item d5">
+         <a href="#">
+        <img src="images/yuanshennb.jpg" alt="vangames" class="art-img">
+        </a>
+        <span class="art-badge">26/10/8</span>
+        <h2 id="OC"></h2>
+      </div>
+
+       <div class="content fade-item d3">
+
+      <a style="font-size: 25px;" href="#"  class="content fade-item d3">OCs</a>
+
+      </div>
+
+           <p class="empty-text fade-item d1">Nothing here yet!</p>
+           <h2 id="Fanart"></h2>
+
+      <a style="font-size: 25px;" href="#"  class="content fade-item d3">Fanart</a>
+
+<div class="art-grid">
+  <div class="art-wrap fade-item d5">
+    <a href="#"><img src="images/7.jpg" alt="vangames" class="art-img"></a>
+    <span class="art-badge">25/10/17</span>
+  </div>
+  <div class="art-wrap fade-item d5">
+    <a href="#"><img src="images/IMG_6693.jpg" alt="vangames" class="art-img"></a>
+    <span class="art-badge">26/10/4</span>
+  </div>
+  <h2 id="Lineart/B&W"></h2>
+</div>
+
+      <a style="font-size: 25px;" href="#"  class="content fade-item d3">Lineart/B&W</a>
+
+      <div class="art-wrap fade-item d5">
+         <a href="#">
+        <img src="images/2174920170102719213.jpg" alt="vangames" class="art-img">
+        </a>
+        <span class="art-badge">26/4/18</span>
+      </div>
+
+      <div class="art-wrap fade-item d5">
+         <a href="#">
+        <img src="images/289689681060322.jpg" alt="vangames" class="art-img">
+        </a>
+        <span class="art-badge">26/10/1</span>
+        <h2 id="Sketches"></h2>
+      </div>
+
+
+      <a style="font-size: 25px;" href="#"  class="content fade-item d3">Sketches (lower completion ones)</a>
+
+      <div class="art-wrap fade-item d5">
+         <a href="#">
+        <img src="images/79867969712.jpg" alt="vangames" class="art-img">
+        </a>
+        <span class="art-badge">26/9/24</span>
+        <h2 id="Drafts"></h2>
+      </div>
+
+
+<a style="font-size: 25px;" href="#"  class="content fade-item d3">Drafts (maybe I'll finish and post them someday?)</a>
+
+
+      <div class="art-wrap fade-item d5">
+         <a href="#">
+        <img src="images/新建画布14.jpg" alt="vangames" class="art-img">
+        </a>
+        <span class="art-badge">Nothing written here</span>
+      </div>
+
     <div class="fade-item d2">
       <a href="index_en.html" class="btn">Back to Home</a>
     </div>
   </main>
 
+ 
   <script>window.MENU_LANG = 'en';</script>
   <script src="js/main.js"></script>
+  <script src="js/ladabian.js"></script>
+  <script>
+  window.addEventListener('load', function () {
+    window.setAgreementLang('en'); 
+    window.showAgreement();
+  });
+  </script>
 </body>
 </html>

@@ -1,5 +1,4 @@
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+ * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
     --black: #1a1a1a;
@@ -157,6 +156,7 @@
   .d4 { animation-delay: 0.20s; }
   .d5 { animation-delay: 0.25s; }
   .d6 { animation-delay: 0.30s; }
+  .d7 { animation-delay: 0.35s; }
 
   .avatar {
     width: 132px;
@@ -254,7 +254,6 @@
   }
 
   .social-item {
-    margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -301,4 +300,3 @@
     .bio    { font-size: 14px; margin-bottom: 28px; }
     .section-title { font-size: 17px; }
   }
-</style>

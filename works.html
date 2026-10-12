@@ -4,13 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>我的作品|xcs的博客</title>
-<link rel="stylesheet" href="css/jjcn.css">
+<link rel="stylesheet" href="css/duzihenbao.css">
+<style>
+  html { scroll-behavior: smooth; }
+</style>
 </head>
 <body>
 
   <div class="topbar">
     <button class="menu-btn" id="menuBtn" aria-label="菜单">
-      <span></span><span></span><span></span>
+      <span></span><span></span><span>
     </button>
     <a href="works_en.html" class="lang-switch" id="langSwitch">
       <span class="cn">中</span>
@@ -24,7 +27,101 @@
   <div class="overlay" id="overlay"></div>
 
   <main class="page">
-    <p class="empty-text fade-item d1">这里还什么都没有呢！</p>
+  
+    <img src="images/avatar.jpg" alt="头像" class="avatar  fade-item d1">
+    <p class="csb fade-item d3">@xcs03563104</p>
+     <p class="intro fade-item d1">
+       16↓，偶尔画画，喜欢画q版小人，同人创作和oc是我热爱的领域<br>
+        在学Blender和MMD和live2d<br>
+        我最喜欢最原终一！
+    </p>
+    
+    <div class="divider fade-item d2"></div>
+
+    <p><br></p>
+    <p style="font-size: 20px;">快速跳转</p>
+    <p><br></p>
+
+<div style="display:flex;">
+<a href="#OC" class="btn">OC</a>
+<a href="#同人" class="btn">同人</a>
+<a href="#线稿/黑白图" class="btn">线稿/<br>黑白图</a>
+<a href="#草图" class="btn">草图</a>
+<a href="#草稿" class="btn">草稿</a>
+</div>
+
+     <a style="font-size: 25px;" href="#"  class="content fade-item d3">最近艺术</a>
+
+      <div class="art-wrap fade-item d5">
+         <a href="#">
+        <img src="images/yuanshennb.jpg" alt="vangames" class="art-img">
+        </a>
+        <span class="art-badge">26/10/8</span>
+        <h2 id="OC"></h2>
+      </div>
+
+       <div class="content fade-item d3">
+
+      <a style="font-size: 25px;" href="#"  class="content fade-item d3">OCs</a>
+
+      </div>
+
+           <p class="empty-text fade-item d1">这里还什么都没有呢！</p>
+           <h2 id="同人"></h2>
+   
+      <a style="font-size: 25px;" href="#"  class="content fade-item d3">同人</a>
+
+<div class="art-grid">
+  <div class="art-wrap fade-item d5">
+    <a href="#"><img src="images/7.jpg" alt="vangames" class="art-img"></a>
+    <span class="art-badge">25/10/17</span>
+  </div>
+  <div class="art-wrap fade-item d5">
+    <a href="#"><img src="images/IMG_6693.jpg" alt="vangames" class="art-img"></a>
+    <span class="art-badge">26/10/4</span>
+  </div>
+  <h2 id="线稿/黑白图"></h2>
+</div>
+
+      <a style="font-size: 25px;" href="#"  class="content fade-item d3">线稿/黑白图</a>
+
+      <div class="art-wrap fade-item d5">
+         <a href="#">
+        <img src="images/2174920170102719213.jpg" alt="vangames" class="art-img">
+        </a>
+        <span class="art-badge">26/4/18</span>
+      </div>
+  
+      <div class="art-wrap fade-item d5">
+         <a href="#">
+        <img src="images/289689681060322.jpg" alt="vangames" class="art-img">
+        </a>
+        <span class="art-badge">26/10/1</span>
+        <h2 id="草图"></h2>
+      </div>
+  
+
+      <a style="font-size: 25px;" href="#"  class="content fade-item d3">草图（完成度比较低的那些</a>
+
+      <div class="art-wrap fade-item d5">
+         <a href="#">
+        <img src="images/79867969712.jpg" alt="vangames" class="art-img">
+        </a>
+        <span class="art-badge">26/9/24</span>
+        <h2 id="草稿"></h2>
+      </div>
+
+      
+  <a style="font-size: 25px;" href="#"  class="content fade-item d3">草稿（也许未来会画完发出来？）</a>
+
+
+      <div class="art-wrap fade-item d5">
+         <a href="#">
+        <img src="images/新建画布14.jpg" alt="vangames" class="art-img">
+        </a>
+        <span class="art-badge">这里什么也没写</span>
+      </div>
+
     <div class="fade-item d2">
       <a href="index.html" class="btn">返回首页</a>
     </div>
@@ -32,5 +129,12 @@
 
   <script>window.MENU_LANG = 'zh';</script>
   <script src="js/main.js"></script>
+  <script src="js/ladabian.js"></script>
+  <script>
+  window.addEventListener('load', function () {
+    window.setAgreementLang('zh');  
+    window.showAgreement();
+  });
+  </script>
 </body>
 </html>

@@ -3,7 +3,7 @@ const menuItems = [
   { text: '关于我', href: '../../about.html' },
   { text: '我的作品', href: '../../works.html' },
   { text: 'OC', href: '../../oc.html' },
-  { text: '动态 / 文章', href: '../../posts.html' },
+  { text: '动态/文章', href: '../../posts.html' },
 ];
 
 const menuItemsen = [
@@ -11,7 +11,7 @@ const menuItemsen = [
   { text: 'About Me', href: '../../about_en.html' },
   { text: 'My Works', href: '../../works_en.html' },
   { text: 'My OCs', href: '../../oc_en.html' },
-  { text: 'Updates / Articles', href: '../../posts_en.html' },
+  { text: 'Post/Articles', href: '../../posts_en.html' },
 ];
 
 function buildMenu(items) {
