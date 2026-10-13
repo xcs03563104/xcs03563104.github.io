@@ -6,6 +6,7 @@
 <title>我的作品|xcs的博客</title>
 <link rel="stylesheet" href="css/duzihenbao.css">
 <link rel="stylesheet" href="css/hsb.css">
+<link rel="stylesheet" href="css/visualizer.css">
 <style>
   html { scroll-behavior: smooth; }
 </style>
@@ -14,7 +15,7 @@
 
   <div class="topbar">
     <button class="menu-btn" id="menuBtn" aria-label="菜单">
-      <span></span><span></span><span>
+      <span></span><span></span><span></span>
     </button>
     <a href="works_en.html" class="lang-switch" id="langSwitch">
       <span class="cn">中</span>
@@ -39,28 +40,32 @@
     
     <div class="divider fade-item d2"></div>
 
-    <p><br></p>
-    <p style="font-size: 20px;">快速跳转</p>
-    <p><br></p>
 
-<div class="h-scroll" style="display:flex;">
- <div class="h-item"><a href="#OC" class="btn">OC</a></div>
- <div class="h-item"><a href="#同人" class="btn">同人</a></div>
- <div class="h-item"><a href="#线稿/黑白图" class="btn">线稿/<br>黑白图</a></div>
- <div class="h-item"><a href="#草图" class="btn">草图</a></div>
- <div class="h-item"><a href="#草稿" class="btn">草稿</a></div>
-</div>
-
-     <a style="font-size: 25px;" href="#"  class="content fade-item d3">最近艺术</a>
+     <p style="font-size: 25px;"class="content fade-item d3">最近艺术</p>
 
       <div class="art-wrap fade-item d5">
-         <a href="#">
+         <a href="art1.html">
         <img src="images/yuanshennb.jpg" alt="vangames" class="art-img">
         </a>
         <span class="art-badge">26/10/8</span>
         <h2 id="OC"></h2>
       </div>
 
+    <p><br></p>
+    <p style="font-size: 20px;">快速跳转</p>
+    <p><br></p>
+
+<div class="h-scroll fade-item d4" style="display:flex">
+  <p><br></p>
+ <div class="h-item"><a href="#OC" class="btn">OC</a></div>
+ <div class="h-item"><a href="#同人" class="btn">同人</a></div>
+ <div class="h-item"><a href="#线稿/黑白图" class="btn">线稿/<br>黑白图</a></div>
+ <div class="h-item"><a href="#草图" class="btn">草图</a></div>
+ <div class="h-item"><a href="#草稿" class="btn">草稿</a></div>
+ <p><br></p>
+</div>
+       
+    <div class="divider fade-item d2"></div>
        <div class="content fade-item d3">
 
       <a style="font-size: 25px;" href="#"  class="content fade-item d3">OCs</a>
@@ -72,7 +77,6 @@
    
       <a style="font-size: 25px;" href="#"  class="content fade-item d3">同人</a>
 
-<div class="art-grid">
   <div class="art-wrap fade-item d5">
     <a href="#"><img src="images/7.jpg" alt="vangames" class="art-img"></a>
     <span class="art-badge">25/10/17</span>
@@ -82,7 +86,6 @@
     <span class="art-badge">26/10/4</span>
   </div>
   <h2 id="线稿/黑白图"></h2>
-</div>
 
       <a style="font-size: 25px;" href="#"  class="content fade-item d3">线稿/黑白图</a>
 
@@ -129,6 +132,7 @@
   </main>
 
  
+ <script src="js/visualizer.js" defer></script>
 <script src="js/player.js"></script>
   <script>window.MENU_LANG = 'zh';</script>
   <script src="js/main.js"></script>
