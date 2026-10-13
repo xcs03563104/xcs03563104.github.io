@@ -392,6 +392,8 @@ body.modal-lock {
   justify-content: center;
 }
 
+  html { scroll-behavior: smooth; }
+
 .panel-1 { border-right: 1px solid #ededed; } 
 
 .section-title {

@@ -4,7 +4,18 @@
   const RULES = {
     '1.html': ['music1.mp3', 'music2.mp3', 'music3.mp3'],
   };
-  const DEFAULT_LIST = ['yy/Girl-In-The-Dark-For-The-Light-HyuN.mp3','yy/Love-Sacrifice-sky_delta_RANASOL.mp3'];
+  const DEFAULT_LIST =  ['yy/Become Friends - 高田雅史.mp3',
+    'yy/絶望Searching - 高田雅史.mp3',
+    'yy/Soulwind - HyuN.mp3',
+  'yy/COLOR - sleepyyer',
+'yy/AIR - SHIKI.mp3',
+'yy/[2024 April Fools] Algebra - Function Phantom - PuronotPuro.mp3',
+'yy/永久の宴 (Zekk Remix) - Aiobahn,YUC’e,Zekk.mp3',
+'yy/Whispers from a Distant Star - Fractal Dreamers.mp3',
+'yy/Cross†Over - HyuN,LyuU.mp3',
+'yy/Intergalactic Bound (feat. Hatsune Miku) - 雄之助,CircusP,初音ミク.mp3',
+'yy/失楽園 - Reol.mp3',
+'yy/Valhalla - Xomu,Retrograde.mp3'];
 
   const KEY = 'music_player_state';
   const SPEED = 60;

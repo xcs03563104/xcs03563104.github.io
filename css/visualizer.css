@@ -1,0 +1,27 @@
+#musicVisualizerWrap{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  z-index: 9;
+  pointer-events: none;
+  opacity: 0; 
+  transition: opacity .35s ease;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: content-box;
+}
+
+#musicVisualizer{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px){
+  #musicVisualizerWrap{ display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  #musicVisualizerWrap{ display: none !important; }
+}

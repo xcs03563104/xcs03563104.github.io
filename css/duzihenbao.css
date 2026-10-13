@@ -287,19 +287,21 @@
 
   @media (max-width: 768px) {
   .h-scroll {
-    display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: 12px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-   -ms-overflow-style: none; 
-  }
-
-  .h-scroll::-webkit-scrollbar {
-  display: none;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 12px;
+  width: 100%;
+  min-width: 0; 
+  -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; 
+  -ms-overflow-style: none;
 }
-  .h-item {
-    flex: 0 0 auto;
-  }
+
+.h-item {
+  flex: 0 0 auto; 
+}
+.h-scroll::-webkit-scrollbar {
+  display: none; 
 }
