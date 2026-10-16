@@ -7,8 +7,7 @@
   };
   const DEFAULT_LIST =  ['yy/Become Friends - 高田雅史.mp3',
     'yy/Soulwind - HyuN.mp3',
-  'yy/COLOR - sleepyyer',
-  'yy/QQ - PHQUASE,ZAQUVA.mp3',
+  'yy/Evanescent - LeaF.mp3',
 'yy/Whispers from a Distant Star - Fractal Dreamers.mp3'];
 
   const KEY = 'music_player_state';

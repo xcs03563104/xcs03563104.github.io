@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OC|xcs的博客</title>
-<link rel="stylesheet" href="css/jjcn.css">
+<title>oc|xcs的博客</title>
+<link rel="stylesheet" href="css/duzihenbao.css">
 <link rel="stylesheet" href="css/hsb.css">
 <link rel="stylesheet" href="css/visualizer.css">
+<style>
+  html { scroll-behavior: smooth; }
+</style>
 </head>
 <body>
 
@@ -14,26 +17,40 @@
     <button class="menu-btn" id="menuBtn" aria-label="菜单">
       <span></span><span></span><span></span>
     </button>
-   <a href="oc_en.html" class="lang-switch" id="langSwitch">
+    <a href="works_en.html" class="lang-switch" id="langSwitch">
       <span class="cn">中</span>
       <span class="sep">|</span>
       <span class="en">eng</span>
     </a>
   </div>
 
-  <nav class="side-menu" id="sideMenu">
-    <a href="index.html">首页</a>
-    <a href="about.html">关于我</a>
-    <a href="works.html">我的作品</a>
-    <a href="oc.html">OC</a>
-    <a href="posts.html">动态 / 文章</a>
-  </nav>
+ <nav class="side-menu" id="sideMenu"></nav>
 
   <div class="overlay" id="overlay"></div>
 
   <main class="page">
-    <p class="empty-text fade-item d1">这里还什么都没有呢！</p>
+  
+    <img src="images/avatar.jpg" alt="头像" class="avatar  fade-item d1">
+    <p class="uid fade-item d3">@xcs03563104</p>
+     <p class="intro fade-item d1">
+       16↓，偶尔画画，喜欢画q版小人，同人创作和oc是我热爱的领域<br>
+        在学Blender和MMD和live2d<br>
+        我最喜欢最原终一！
+    </p>
+     <p><br></p>
     <div class="fade-item d2">
+      <a href="index.html" class="btn">返回首页</a>
+    </div>
+    <div class="divider fade-item d2"></div>
+<p style="font-size: 25px;"class="content fade-item d3">列表</p>
+      <div class="art-wrap fade-item d5">
+         <a href="art6.html">
+        <img src="images/新建画布24.jpg" alt="vangames" class="art-img">
+        </a>
+        <span class="art-badge">25/12/12</span>
+      </div>
+
+      <div class="fade-item d2">
       <a href="index.html" class="btn">返回首页</a>
     </div>
   </main>
@@ -43,5 +60,12 @@
 <script src="js/player.js"></script>
   <script>window.MENU_LANG = 'zh';</script>
   <script src="js/main.js"></script>
+  <script src="js/ladabian.js"></script>
+  <script>
+  window.addEventListener('load', function () {
+    window.setAgreementLang('zh');  
+    window.showAgreement();
+  });
+  </script>
 </body>
 </html>

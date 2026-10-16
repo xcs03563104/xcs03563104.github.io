@@ -151,12 +151,12 @@
     to   { opacity: 1; }
   }
   .d1 { animation-delay: 0.05s; }
-  .d2 { animation-delay: 0.10s; }
-  .d3 { animation-delay: 0.15s; }
-  .d4 { animation-delay: 0.20s; }
-  .d5 { animation-delay: 0.25s; }
-  .d6 { animation-delay: 0.30s; }
-  .d7 { animation-delay: 0.35s; }
+.d2 { animation-delay: 0.12s; }
+.d3 { animation-delay: 0.20s; }
+.d4 { animation-delay: 0.27s; }
+.d5 { animation-delay: 0.35s; }
+.d6 { animation-delay: 0.40s; }
+.d7 { animation-delay: 0.45s; }
 
   .avatar {
     width: 132px;
